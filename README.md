@@ -34,6 +34,7 @@ APP_FAKER_LOCALE=th_TH
 ```
 
 ```
+DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
 DB_DATABASE=omnidine
