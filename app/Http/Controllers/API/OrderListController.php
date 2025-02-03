@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Repositories\UserRepository;
+use App\Http\Resources\OrderListCollection;
+use App\Http\Resources\OrderListResource;
+use App\Models\OrderList;
+use App\Repositories\OrderListRepository;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class OrderListController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
 
     public function __construct(
-        private UserRepository $userRepository
+        private OrderListRepository $orderListRepository,
     ) {}
 
     public function index()
     {
-        $users = $this->userRepository->getAll();
-        return new UserCollection($users);
+        $orderLists = $this->orderListRepository->getAll();
+        return new OrderListCollection($orderLists);
     }
 
     /**
@@ -36,15 +36,15 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(OrderList $orderList)
     {
-        return new UserResource($user);
+        return new OrderListResource($orderList);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, OrderList $orderList)
     {
         //
     }
@@ -52,7 +52,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(OrderList $orderList)
     {
         //
     }
