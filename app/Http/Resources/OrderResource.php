@@ -27,7 +27,7 @@ class OrderResource extends JsonResource
     {
         // Use the findByOrderId method to fetch the OrderList for the current order
         $orderLists = $this->orderListRepo->findByOrderId($this->id);
-        
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
