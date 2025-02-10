@@ -1,11 +1,22 @@
 <?php
 
+use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\OrderListController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json([
-        'success' => true,
-        'version' => '1.0.0',
-    ])->header('Access-Control-Allow-Origin', '*');
+Route::middleware('throttle:api')->group(function () {
+    Route::get('/', function () {
+        return [
+            'success' => true,
+            'version' => '1.0.0',
+        ];
+    });
+
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('orderLists', OrderListController::class);
 });
+
+
