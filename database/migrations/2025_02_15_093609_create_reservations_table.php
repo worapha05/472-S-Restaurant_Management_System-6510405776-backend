@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Order;
+use App\Models\Table;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_lists', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->foreignIdFor(Order::class);
-//            $table->string('status')->default('PENDING');
-//            $table->foreignIdFor(Food::class); // wait for Table 'food'
-            $table->double('price');
-            $table->integer('quantity');
+            $table->foreignIdFor(Table::class);
+            $table->foreignIdFor(User::class);
+            $table->timestamp('appointment_time');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_lists');
+        Schema::dropIfExists('reservations');
     }
 };
