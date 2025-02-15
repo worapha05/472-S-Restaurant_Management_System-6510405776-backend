@@ -3,26 +3,25 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Collections\OrderCollection;
-use App\Http\Resources\OrderResource;
-use App\Models\Order;
-use App\Repositories\OrderRepository;
+use App\Http\Resources\Collections\TableCollection;
+use App\Http\Resources\TableResource;
+use App\Models\Table;
+use App\Repositories\TableRepository;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function __construct(
-        private OrderRepository $orderRepository,
+        private TableRepository $tableRepository
     ) {}
 
     public function index()
     {
-        $orders = $this->orderRepository->getAll();
-        return new OrderCollection($orders);
+        $tables = $this->tableRepository->getAll();
+        return new TableCollection($tables);
     }
 
     /**
@@ -36,15 +35,15 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(Table $table)
     {
-        return new OrderResource($order);
+        return new TableResource($table);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Table $table)
     {
         //
     }
@@ -52,7 +51,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy(Table $table)
     {
         //
     }

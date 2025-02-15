@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Collections\UserCollection;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Collections\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;

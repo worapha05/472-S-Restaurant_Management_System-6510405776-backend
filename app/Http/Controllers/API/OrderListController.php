@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Collections\OrderListCollection;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Collections\OrderListCollection;
 use App\Http\Resources\OrderListResource;
 use App\Models\OrderList;
 use App\Repositories\OrderListRepository;
