@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\OrderListController;
+use App\Http\Controllers\API\ReservationController;
 use App\Http\Controllers\API\TableController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ Route::middleware('throttle:api')->group(function () {
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('orderLists', OrderListController::class);
     Route::apiResource('tables', TableController::class);
+    Route::apiResource('reservations', ReservationController::class);
 });
 
 
