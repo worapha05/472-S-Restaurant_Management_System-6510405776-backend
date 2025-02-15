@@ -20,6 +20,7 @@ class OrderListResource extends JsonResource
             'order_id' => $this->order_id,
             'price' => $this->price,
             'quantity' => $this->quantity,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,

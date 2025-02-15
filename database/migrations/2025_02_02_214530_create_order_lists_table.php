@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->foreignIdFor(Order::class);
-//            $table->string('status')->default('PENDING');
+            $table->string('status')->default('PENDING');
 //            $table->foreignIdFor(Food::class); // wait for Table 'food'
             $table->double('price');
             $table->integer('quantity');

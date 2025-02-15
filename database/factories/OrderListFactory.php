@@ -21,6 +21,7 @@ class OrderListFactory extends Factory
 //            'food_id' => Food::factory(), // Uncomment if you have a Food model
             'price' => $this->faker->randomFloat(2, 5, 100),
             'quantity' => $this->faker->numberBetween(1, 10),
+            'status' => $this->faker->randomElement(['PENDING', 'COMPLETED', 'CANCELLED']),
             'created_at' => now(),
             'updated_at' => now(),
         ];
