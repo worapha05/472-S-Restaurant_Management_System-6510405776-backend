@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\OrderListController;
 use App\Http\Controllers\API\UserController;
@@ -17,6 +18,7 @@ Route::middleware('throttle:api')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('orderLists', OrderListController::class);
+    Route::apiResource('foods', FoodController::class);
 });
 
 

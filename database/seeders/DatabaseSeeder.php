@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
 use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\User;
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Order::factory(30)->create();
         OrderList::factory(50)->create();
+        Food::factory(50)->create();
     }
 }
