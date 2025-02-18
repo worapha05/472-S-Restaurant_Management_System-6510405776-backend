@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
 use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\Reservation;
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         OrderList::factory(50)->create();
         Table::factory(20)->create();
         Reservation::factory(30)->create();
+        Food::factory(50)->create();
     }
 }
