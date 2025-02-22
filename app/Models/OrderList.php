@@ -11,9 +11,14 @@ class OrderList extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['order_id', 'description', 'price', 'quantity', 'status'];
+    protected $fillable = ['order_id', 'food_id', 'description', 'price', 'quantity', 'status'];
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class);
     }
 }

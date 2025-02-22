@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,13 +16,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-//            $table->foreignIdFor(App\Models\Table::class); //wait for Table 'table'
+            $table->foreignIdFor(Table::class)->nullable();
             $table->text('address')->nullable();
             $table->timestamp('accept')->nullable();
             $table->string('status')->default('PENDING');
             $table->string('type');
-            $table->string('payment_method');
-            $table->double('sum_price');
+            $table->string('payment_method')->nullable();
+            $table->double('sum_price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

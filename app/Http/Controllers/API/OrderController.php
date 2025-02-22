@@ -38,6 +38,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $order = Order::with(['orderLists.food'])->findOrFail($order->id);
         return new OrderResource($order);
     }
 

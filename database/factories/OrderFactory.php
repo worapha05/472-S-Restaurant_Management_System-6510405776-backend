@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,6 +18,7 @@ class OrderFactory extends Factory
     {
         return [
             'user_id' => fake()->randomElement(User::all()->pluck('id')->toArray()), // Creates a new User if needed
+            'table_id' => fake()->randomElement(Table::all()->pluck('id')->toArray()),
             'address' => $this->faker->address(),
             'accept' => $this->faker->optional()->dateTime(),
             'status' => $this->faker->randomElement(['PENDING', 'COMPLETED', 'CANCELLED']),

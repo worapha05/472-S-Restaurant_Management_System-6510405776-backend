@@ -16,7 +16,7 @@ class FoodFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'price' => $this->faker->randomFloat(2, 10, 500),
+            'price' => $this->faker->randomFloat(0, 10, 500),
             'status' => $this->faker->randomElement(['available', 'unavailable']),
             'category' => $this->faker->randomElement(['main course', 'dessert', 'beverage']),
             'description' => $this->faker->sentence(),
