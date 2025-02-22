@@ -30,7 +30,16 @@ class OrderListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderList = $this->orderListRepository->create([
+            'order_id' => $request->get('order_id'),
+            'food_id' => $request->get('food_id'),
+            'description' => $request->get('description'),
+            'price' => $request->get('price'),
+            'quantity' => $request->get('quantity'),
+            'status' => 'IN_PROGRESS'
+        ]);
+
+        return new OrderListResource($orderList);
     }
 
     /**
@@ -46,7 +55,11 @@ class OrderListController extends Controller
      */
     public function update(Request $request, OrderList $orderList)
     {
-        //
+        $this->orderListRepository->update([
+            'status' => $request->get('status')
+        ], $orderList->id);
+
+        return new OrderListResource($orderList->refresh());
     }
 
     /**

@@ -29,7 +29,14 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservation = $this->reservationRepository->create([
+            'user_id' => $request->get('user_id'),
+            'table_id' => $request->get('table_id'),
+            'appointment_time' => $request->get('appointment_time'),
+            'status' => 'PENDING',
+        ]);
+
+        return new ReservationResource($reservation);
     }
 
     /**
@@ -45,7 +52,11 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $this->reservationRepository->update([
+            'status' => $request->get('status')
+        ], $reservation->id);
+
+        return new ReservationResource($reservation->refresh());
     }
 
     /**

@@ -29,7 +29,12 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $table = $this->tableRepository->create([
+            'status' => $request->get('status'),
+            'seats' => $request->get('seats'),
+        ]);
+
+        return new TableResource($table);
     }
 
     /**
@@ -45,7 +50,12 @@ class TableController extends Controller
      */
     public function update(Request $request, Table $table)
     {
-        //
+        $this->tableRepository->update([
+            'status' => $request->get('status'),
+            'seats' => $request->get('seats'),
+        ], $table->id);
+
+        return new TableResource($table->refresh());
     }
 
     /**

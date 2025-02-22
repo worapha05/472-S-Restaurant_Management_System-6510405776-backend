@@ -30,7 +30,27 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'table_id' => ['nullable', 'exists:tables,id'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'type' => ['required', 'in:DELIVERY,PICKUP,DINE_IN'],
+            'payment_method' => ['required', 'in:CASH,CREDIT_CARD,QRCODE'],
+            'sum_price' => ['required', 'numeric', 'min:0'],
+        ]);
+
+        $order = $this->orderRepository->create([
+            'user_id' => $request->get('user_id'),
+            'table_id' => $request->get('table_id'),
+            'address' => $request->get('address'),
+            'accept' => null,
+            'status' => 'PENDING',
+            'type' => $request->get('type'),
+            'payment_method' => $request->get('payment_method'),
+            'sum_price' => $request->get('sum_price'),
+        ]);
+
+        return new OrderResource($order);
     }
 
     /**
@@ -47,14 +67,23 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+//        $validated = $request->validate([
+//            'status' => ['nullable', 'in:PENDING,WAITING,COMPLETED,CANCELLED'],
+//            'payment_method' => ['nullable', 'string', 'in:CASH,CREDIT_CARD,ONLINE'],
+//            'sum_price' => ['nullable', 'numeric', 'min:0'],
+//        ]);
+
+        $this->orderRepository->update([
+            'status' => $request->get('status'),
+            'payment_method' => $request->get('payment_method'),
+            'sum_price' => $request->get('sum_price'),
+        ], $order->id);
+
+        return new OrderResource($order->refresh());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Order $order)
     {
-        //
+
     }
 }
