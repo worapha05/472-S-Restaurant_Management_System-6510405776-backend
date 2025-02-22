@@ -3,26 +3,25 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Collections\OrderCollection;
-use App\Http\Resources\OrderResource;
-use App\Models\Order;
-use App\Repositories\OrderRepository;
+use App\Http\Resources\Collections\ReservationCollection;
+use App\Http\Resources\ReservationResource;
+use App\Models\Reservation;
+use App\Repositories\ReservationRepository;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function __construct(
-        private OrderRepository $orderRepository,
+        private ReservationRepository $reservationRepository
     ) {}
 
     public function index()
     {
-        $orders = $this->orderRepository->getAll();
-        return new OrderCollection($orders);
+        $reservations = $this->reservationRepository->getAll();
+        return new ReservationCollection($reservations);
     }
 
     /**
@@ -36,16 +35,15 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(Reservation $reservation)
     {
-        $order = Order::with(['orderLists.food'])->findOrFail($order->id);
-        return new OrderResource($order);
+        return new ReservationResource($reservation);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Reservation $reservation)
     {
         //
     }
@@ -53,7 +51,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy(Reservation $reservation)
     {
         //
     }

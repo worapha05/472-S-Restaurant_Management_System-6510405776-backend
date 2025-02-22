@@ -25,12 +25,10 @@ class OrderResource extends JsonResource
 
     public function toArray(Request $request): array
     {
-        // Use the findByOrderId method to fetch the OrderList for the current order
-        $orderLists = $this->orderListRepo->findByOrderId($this->id);
-
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'table_id' => $this->table_id,
             'address' => $this->address,
             'accept' => $this->accept,
             'status' => $this->status,
@@ -40,7 +38,7 @@ class OrderResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
-            'order_lists' => OrderListResource::collection($orderLists),
+            'order_lists' => OrderListResource::collection($this->whenLoaded('orderLists')),
         ];
     }
 }

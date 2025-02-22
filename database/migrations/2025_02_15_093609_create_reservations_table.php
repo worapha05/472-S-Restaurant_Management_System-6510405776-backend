@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Table::class);
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Table::class)->nullable();
-            $table->text('address')->nullable();
-            $table->timestamp('accept')->nullable();
-            $table->string('status')->default('PENDING');
-            $table->string('type');
-            $table->string('payment_method')->nullable();
-            $table->double('sum_price')->nullable();
+            $table->timestamp('appointment_time');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('reservations');
     }
 };
