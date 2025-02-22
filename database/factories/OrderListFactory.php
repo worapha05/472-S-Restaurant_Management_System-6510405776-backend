@@ -24,7 +24,7 @@ class OrderListFactory extends Factory
             'description' => $this->faker->sentence(),
             'price' => $food->price,
             'quantity' => $this->faker->numberBetween(1, 10),
-            'status' => $this->faker->randomElement(['PENDING', 'COMPLETED', 'CANCELLED']),
+            'status' => $this->faker->randomElement(['IN_PROGRESS', 'COMPLETED', 'CANCELLED']),
             'created_at' => now(),
             'updated_at' => now(),
         ];

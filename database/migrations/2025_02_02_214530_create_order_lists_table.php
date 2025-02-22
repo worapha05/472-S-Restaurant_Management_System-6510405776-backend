@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('order_lists', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignIdFor(Order::class);
             $table->string('status')->default('PENDING');
             $table->foreignIdFor(Food::class); // wait for Table 'food'
