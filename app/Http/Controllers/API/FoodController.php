@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Collections\FoodCollection;
+use App\Http\Resources\Collections\FoodCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FoodResource;
 use App\Models\Food;
@@ -38,7 +38,6 @@ class FoodController extends Controller
     public function show(Food $food)
     {
         return new FoodResource($food);
-
     }
 
     /**
