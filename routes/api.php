@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API\InventoryLogController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\OrderListController;
 use App\Http\Controllers\API\ReservationController;
+use App\Http\Controllers\API\StockEntryController;
+use App\Http\Controllers\API\StockItemController;
 use App\Http\Controllers\API\TableController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('throttle:api')->group(function () {
@@ -23,6 +25,9 @@ Route::middleware('throttle:api')->group(function () {
     Route::apiResource('tables', TableController::class);
     Route::apiResource('reservations', ReservationController::class);
     Route::apiResource('foods', FoodController::class);
+    Route::apiResource('stockItems', StockItemController::class);
+    Route::apiResource('stockEntries', StockEntryController::class);
+    Route::apiResource('inventoryLogs', InventoryLogController::class);
 });
 
 

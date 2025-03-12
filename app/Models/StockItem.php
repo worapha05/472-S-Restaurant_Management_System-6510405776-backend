@@ -15,6 +15,6 @@ class StockItem extends Model
 
     public function stock_entries(): HasMany
     {
-        return $this->hasMany(StockEntries::class);
+        return $this->hasMany(StockEntry::class);
     }
 }

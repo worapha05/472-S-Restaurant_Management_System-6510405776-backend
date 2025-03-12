@@ -1,0 +1,41 @@
+### GET request to /api/inventoryLogs
+GET http://localhost/api/inventoryLogs
+###
+
+### POST request to /api/inventoryLogs
+POST http://localhost/api/inventoryLogs
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user_id": 7,
+    "note": "aut",
+    "total_cost": 100,
+    "source": "93\/373 สะพาน ทหารอากาศอุทิศ\nหมู่บ้าน ประไพพรรณ, 98987"
+}
+###
+
+### GET request to /api/inventoryLogs/{id}
+GET http://localhost/api/inventoryLogs/12
+Accept: application/json
+###
+
+### PUT request to /api/inventoryLogs/{id}
+PUT http://localhost/api/inventoryLogs/12
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user_id": 7,
+    "note": "อยู่นี้จ้าาา",
+    "total_cost": 226948.03,
+    "source": "93\/373 สะพาน ทหารอากาศอุทิศ\nหมู่บ้าน ประไพพรรณ, 98987"
+}
+###
+
+### DELETE request to /api/inventoryLogs/{id}
+DELETE http://localhost/api/inventoryLogs/12
+Accept: application/json
+
+###
+

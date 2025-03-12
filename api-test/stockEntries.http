@@ -1,0 +1,40 @@
+### GET request to /api/stockEntries
+GET http://localhost/api/stockEntries
+###
+
+### POST request to /api/stockEntries
+POST http://localhost/api/stockEntries
+Accept: application/json
+Content-Type: application/json
+
+{
+    "stock_item_id": 51,
+    "inventory_log_id": 11,
+    "cost": 100,
+    "quantity_added": 70
+}
+###
+
+### GET request to /api/stockEntries/{id}
+GET http://localhost/api/stockEntries/41
+Accept: application/json
+###
+
+### PUT request to /api/stockEntries/{id}
+PUT http://localhost/api/stockEntries/41
+Accept: application/json
+Content-Type: application/json
+
+{
+    "stock_item_id": 51,
+    "inventory_log_id": 11,
+    "cost": 200,
+    "quantity_added": 70
+}
+###
+
+### DELETE request to /api/stockEntries/{id}
+DELETE http://localhost/api/stockEntries/41
+Accept: application/json
+
+###

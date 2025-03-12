@@ -40,6 +40,6 @@ class User extends Authenticatable
 
     public function inventory_logs(): HasMany
     {
-        return $this->hasMany(InventoryLogs::class);
+        return $this->hasMany(InventoryLog::class);
     }
 }

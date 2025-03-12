@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\InventoryLogs;
+use App\Models\InventoryLog;
 use App\Models\StockItem;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('stock_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(StockItem::class)->nullable();
-            $table->foreignIdFor(InventoryLogs::class)->nullable();
-            $table->double('cost_per_unit');
+            $table->foreignIdFor(InventoryLog::class)->nullable();
+            $table->double('cost');
             $table->double('quantity_added');
             $table->timestamps();
             $table->softDeletes();
