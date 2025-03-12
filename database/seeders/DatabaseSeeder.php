@@ -25,9 +25,10 @@ class DatabaseSeeder extends Seeder
         Order::factory(30)->create();
         OrderList::factory(50)->create();
         Reservation::factory(30)->create();
-        StockItem::factory(50)->create();
         $this->call([
-            InventoryLogAndStockEntrySeeder::class,
+            StockItemSeeder::class,
+            InventoryLogSeeder::class,
+            StockEntrySeeder::class,
         ]);
     }
 }
