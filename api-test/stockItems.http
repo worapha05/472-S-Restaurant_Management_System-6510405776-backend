@@ -1,0 +1,40 @@
+### GET request to /api/stockItems
+GET http://localhost/api/stockItems
+###
+
+### POST request to /api/stockItems
+POST http://localhost/api/stockItems
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "เป็ดบด",
+    "description": "ไก่บดละเอียด",
+    "current_stock": 35,
+    "unit": "กิโลกรัม"
+}
+###
+
+### GET request to /api/stockItems/{id}
+GET http://localhost/api/stockItems/50
+Accept: application/json
+###
+
+### PUT request to /api/stockItems/{id}
+PUT http://localhost/api/stockItems/51
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "เป็ดบด",
+    "description": "หมูบดละเอียด",
+    "current_stock": 0,
+    "unit": "กิโลกรัม"
+}
+###
+
+### DELETE request to /api/stockItems/{id}
+DELETE http://localhost/api/stockItems/51
+Accept: application/json
+
+###

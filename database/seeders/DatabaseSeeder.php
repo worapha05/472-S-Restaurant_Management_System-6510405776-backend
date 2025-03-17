@@ -3,11 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Food;
-use App\Models\InventoryLogs;
 use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\Reservation;
-use App\Models\StockEntries;
 use App\Models\StockItem;
 use App\Models\Table;
 use App\Models\User;
@@ -27,8 +25,10 @@ class DatabaseSeeder extends Seeder
         Order::factory(30)->create();
         OrderList::factory(50)->create();
         Reservation::factory(30)->create();
-        InventoryLogs::factory(50)->create();
-        StockItem::factory(50)->create();
-        StockEntries::factory(50)->create();
+        $this->call([
+            StockItemSeeder::class,
+            InventoryLogSeeder::class,
+            StockEntrySeeder::class,
+        ]);
     }
 }

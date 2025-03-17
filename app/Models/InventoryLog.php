@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class InventoryLogs extends Model
+class InventoryLog extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -21,6 +21,6 @@ class InventoryLogs extends Model
 
     public function stock_entries(): HasMany
     {
-        return $this->hasMany(StockEntries::class);
+        return $this->hasMany(StockEntry::class);
     }
 }

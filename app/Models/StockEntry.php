@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StockEntries extends Model
+class StockEntry extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [ 'stock_item_id', 'inventory_logs_id', 'cost_per_unit', 'quantity_added'];
+    protected $fillable = [ 'stock_item_id', 'inventory_log_id', 'cost', 'quantity_added'];
 
     public function inventory_logs(): BelongsTo
     {
-        return $this->belongsTo(InventoryLogs::class);
+        return $this->belongsTo(InventoryLog::class);
     }
 
     public function stock_item(): BelongsTo
