@@ -47,4 +47,5 @@ Route::middleware('throttle:api')->group(function () {
     Route::apiResource('inventoryLogs', InventoryLogController::class);
 
     Route::get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUser']);
+    Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
 });

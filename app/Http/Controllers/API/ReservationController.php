@@ -7,6 +7,7 @@ use App\Http\Resources\Collections\ReservationCollection;
 use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
 use App\Repositories\ReservationRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -15,7 +16,8 @@ class ReservationController extends Controller
      * Display a listing of the resource.
      */
     public function __construct(
-        private ReservationRepository $reservationRepository
+        private ReservationRepository $reservationRepository,
+        private UserRepository $userRepository,
     ) {}
 
     public function index()
@@ -65,5 +67,24 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+    }
+
+    public function getReservationsByUser($userId)
+    {
+        try {
+            // Validate that the user exists
+            $user = $this->userRepository->isExists($userId);
+
+            if($user == null) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+
+            // Get orders for the user
+            $reservations = $this->reservationRepository->findByUserId($userId);
+
+            return new ReservationCollection($reservations);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
