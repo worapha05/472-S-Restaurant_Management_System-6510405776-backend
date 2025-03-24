@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Auth\AuthenticateController;
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\InventoryLogController;
 use App\Http\Controllers\API\OrderController;
@@ -20,20 +21,31 @@ Route::middleware('throttle:api')->group(function () {
         ];
     });
 
-    Route::post('/upload', [UploadController::class, 'uploadFile']);
+    // Public routes (no authentication required)
+    Route::post('login', [AuthenticateController::class, 'login'])->name('user.login');
 
+    // Protected routes (authentication required)
+    Route::middleware('auth:sanctum')->group(function () {
+        // Authentication
+        Route::delete('revoke', [AuthenticateController::class, 'revoke'])->name('user.revoke');
+    });
 
+    Route::apiResource('foods', FoodController::class);
 
+    //Put it inside auth after finish the system
+    // File upload
+    Route::post('upload', [UploadController::class, 'uploadFile']);
+
+    // Resources that require authentication
     Route::apiResource('users', UserController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('order_lists', OrderListController::class);
     Route::apiResource('tables', TableController::class);
     Route::apiResource('reservations', ReservationController::class);
-    Route::apiResource('foods', FoodController::class);
     Route::apiResource('stockItems', StockItemController::class);
     Route::apiResource('stockEntries', StockEntryController::class);
     Route::apiResource('inventoryLogs', InventoryLogController::class);
+
+    Route::get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUser']);
+    Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
 });
-
-
-

@@ -7,16 +7,19 @@ use App\Http\Resources\Collections\OrderCollection;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Repositories\OrderRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
 
     public function __construct(
         private OrderRepository $orderRepository,
+        private UserRepository $userRepository,
     ) {}
 
     public function index()
@@ -85,5 +88,24 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
 
+    }
+
+    public function getOrdersByUser($userId)
+    {
+        try {
+            // Validate that the user exists
+            $user = $this->userRepository->isExists($userId);
+
+            if($user == null) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+
+            // Get orders for the user
+            $orders = $this->orderRepository->findByUserId($userId);
+
+            return new OrderCollection($orders);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
