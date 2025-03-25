@@ -93,9 +93,6 @@ class OrderController extends Controller
 
     public function getOrdersByUser($userId)
     {
-
-        Gate::authorize('viewAny', Order::class);
-
         try {
             // Validate that the user exists
             $user = $this->userRepository->isExists($userId);
@@ -106,6 +103,10 @@ class OrderController extends Controller
 
             // Get orders for the user
             $orders = $this->orderRepository->findByUserId($userId);
+
+            foreach ($orders as $order) {
+                Gate::authorize('view', $order);
+            }
 
             return new OrderCollection($orders);
         } catch (\Exception $e) {

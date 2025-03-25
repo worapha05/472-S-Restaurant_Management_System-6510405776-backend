@@ -21,7 +21,8 @@ class OrderPolicy
      */
     public function view(User $user, Order $order): bool
     {
-        return false;
+        // Allow users to view only their own orders
+        return $user->id === $order->user_id;
     }
 
     /**
