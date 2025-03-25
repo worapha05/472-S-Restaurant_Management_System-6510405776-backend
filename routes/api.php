@@ -28,6 +28,7 @@ Route::middleware('throttle:api')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         // Authentication
         Route::delete('revoke', [AuthenticateController::class, 'revoke'])->name('user.revoke');
+        Route::get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUser']);
     });
 
     Route::apiResource('foods', FoodController::class);
@@ -46,6 +47,5 @@ Route::middleware('throttle:api')->group(function () {
     Route::apiResource('stockEntries', StockEntryController::class);
     Route::apiResource('inventoryLogs', InventoryLogController::class);
 
-    Route::get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUser']);
     Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
 });

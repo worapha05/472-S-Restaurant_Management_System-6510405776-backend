@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -92,6 +93,9 @@ class OrderController extends Controller
 
     public function getOrdersByUser($userId)
     {
+
+        Gate::authorize('viewAny', Order::class);
+
         try {
             // Validate that the user exists
             $user = $this->userRepository->isExists($userId);
