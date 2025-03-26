@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,6 +19,7 @@ class UploadController extends Controller
      */
     public function uploadFile(Request $request)
     {
+        Gate::authorize('uploadImage', User::class);
         // Validate the request
         $request->validate([
             'file' => 'required|file|max:10240', // 10MB max size

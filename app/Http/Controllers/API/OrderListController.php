@@ -8,6 +8,7 @@ use App\Http\Resources\OrderListResource;
 use App\Models\OrderList;
 use App\Repositories\OrderListRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderListController extends Controller
 {
@@ -21,6 +22,7 @@ class OrderListController extends Controller
 
     public function index()
     {
+        Gate::authorize('viewAny', OrderList::class);
         $orderLists = $this->orderListRepository->getAll();
         return new OrderListCollection($orderLists);
     }
@@ -30,6 +32,7 @@ class OrderListController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', OrderList::class);
         $orderList = $this->orderListRepository->create([
             'order_id' => $request->get('order_id'),
             'food_id' => $request->get('food_id'),
@@ -47,6 +50,7 @@ class OrderListController extends Controller
      */
     public function show(OrderList $orderList)
     {
+        Gate::authorize('view', $orderList);
         return new OrderListResource($orderList);
     }
 
@@ -55,6 +59,7 @@ class OrderListController extends Controller
      */
     public function update(Request $request, OrderList $orderList)
     {
+        Gate::authorize('update', $orderList);
         $this->orderListRepository->update([
             'status' => $request->get('status')
         ], $orderList->id);

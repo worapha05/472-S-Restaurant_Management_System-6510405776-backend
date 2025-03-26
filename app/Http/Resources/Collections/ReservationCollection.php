@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Collections;
 
+use App\Http\Resources\ReservationResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -15,7 +16,7 @@ class ReservationCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->collection,
+            'data' => ReservationResource::collection($this->collection),  // Use ReservationResource to transform each item
         ];
     }
 }

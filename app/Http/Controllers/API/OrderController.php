@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -24,7 +25,8 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->orderRepository->getAll();
+        Gate::authorize('viewAny',  Order::class);
+        $orders = $this->orderRepository->getAllByDesc();
         return new OrderCollection($orders);
     }
 
@@ -33,6 +35,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create',  Order::class);
         $request->validate([
             'user_id' => ['required', 'exists:users,id'],
             'table_id' => ['nullable', 'exists:tables,id'],
@@ -61,6 +64,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        Gate::authorize('view', $order);
         $order = Order::with(['orderLists.food'])->findOrFail($order->id);
         return new OrderResource($order);
     }
@@ -70,17 +74,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-//        $validated = $request->validate([
-//            'status' => ['nullable', 'in:PENDING,WAITING,COMPLETED,CANCELLED'],
-//            'payment_method' => ['nullable', 'string', 'in:CASH,CREDIT_CARD,ONLINE'],
-//            'sum_price' => ['nullable', 'numeric', 'min:0'],
-//        ]);
+        Gate::authorize('update', $order);
+        $validated = $request->validate([
+            'status' => ['nullable', 'in:PENDING,WAITING,COMPLETED,CANCELLED'],
+            'payment_method' => ['nullable', 'string', 'in:CASH,CREDIT_CARD,ONLINE'],
+            'sum_price' => ['nullable', 'numeric', 'min:0'],
+        ]);
 
-        $this->orderRepository->update([
-            'status' => $request->get('status'),
-            'payment_method' => $request->get('payment_method'),
-            'sum_price' => $request->get('sum_price'),
-        ], $order->id);
+        $request->user()->orders()->update($validated);
 
         return new OrderResource($order->refresh());
     }
@@ -102,6 +103,10 @@ class OrderController extends Controller
 
             // Get orders for the user
             $orders = $this->orderRepository->findByUserId($userId);
+
+            foreach ($orders as $order) {
+                Gate::authorize('view', $order);
+            }
 
             return new OrderCollection($orders);
         } catch (\Exception $e) {

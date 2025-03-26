@@ -22,7 +22,7 @@ class ReservationFactory extends Factory
             'user_id' => fake()->randomElement(User::all()->pluck('id')->toArray()),
             'table_id' => fake()->randomElement(Table::all()->pluck('id')->toArray()),
             'appointment_time' => $this->faker->dateTimeBetween('now', '+1 day'),
-            'status' => $this->faker->randomElement(['PENDING', 'CONFIRMED', 'CANCELLED']),
+            'status' => $this->faker->randomElement(['PENDING', 'CONFIRMED', 'CANCELLED', 'NOT_ARRIVED', 'ARRIVED']),
         ];
     }
 }

@@ -43,4 +43,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(InventoryLog::class);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'ADMIN';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === 'USER';
+    }
+
+    public function isStaff(): bool
+    {
+        return $this->role === 'STAFF';
+    }
 }

@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use App\Repositories\ReservationRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ReservationController extends Controller
 {
@@ -22,6 +23,7 @@ class ReservationController extends Controller
 
     public function index()
     {
+        Gate::authorize('viewAny', Reservation::class);
         $reservations = $this->reservationRepository->getAll();
         return new ReservationCollection($reservations);
     }
@@ -31,6 +33,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Reservation::class);
         $reservation = $this->reservationRepository->create([
             'user_id' => $request->get('user_id'),
             'table_id' => $request->get('table_id'),
@@ -46,6 +49,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
+        Gate::authorize('view', $reservation);
         return new ReservationResource($reservation);
     }
 
@@ -54,6 +58,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
+        Gate::authorize('update', $reservation);
         $this->reservationRepository->update([
             'status' => $request->get('status')
         ], $reservation->id);
@@ -81,6 +86,10 @@ class ReservationController extends Controller
 
             // Get orders for the user
             $reservations = $this->reservationRepository->findByUserId($userId);
+
+            foreach ($reservations as $reservation) {
+                Gate::authorize('view', $reservation);
+            }
 
             return new ReservationCollection($reservations);
         } catch (\Exception $e) {
