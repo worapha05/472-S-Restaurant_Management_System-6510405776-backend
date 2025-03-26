@@ -24,28 +24,35 @@ Route::middleware('throttle:api')->group(function () {
     // Public routes (no authentication required)
     Route::post('login', [AuthenticateController::class, 'login'])->name('user.login');
 
+    // Food routes accessible without authentication
+    Route::get('foods', [FoodController::class, 'index']);
+    Route::get('foods/{food}', [FoodController::class, 'show']);
+
     // Protected routes (authentication required)
     Route::middleware('auth:sanctum')->group(function () {
         // Authentication
         Route::delete('revoke', [AuthenticateController::class, 'revoke'])->name('user.revoke');
         Route::get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUser']);
+
+        // Food management (create, update, delete) require authentication
+        Route::post('foods', [FoodController::class, 'store']);
+        Route::put('foods/{food}', [FoodController::class, 'update']);
+        Route::patch('foods/{food}', [FoodController::class, 'update']);
+        Route::delete('foods/{food}', [FoodController::class, 'destroy']);
+
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('orders', OrderController::class);
+        Route::apiResource('order_lists', OrderListController::class);
+        Route::apiResource('tables', TableController::class);
+        Route::apiResource('reservations', ReservationController::class);
+
+        Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
     });
 
-    Route::apiResource('foods', FoodController::class);
-
-    //Put it inside auth after finish the system
     // File upload
     Route::post('upload', [UploadController::class, 'uploadFile']);
 
-    // Resources that require authentication
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('orders', OrderController::class);
-    Route::apiResource('order_lists', OrderListController::class);
-    Route::apiResource('tables', TableController::class);
-    Route::apiResource('reservations', ReservationController::class);
     Route::apiResource('stockItems', StockItemController::class);
     Route::apiResource('stockEntries', StockEntryController::class);
     Route::apiResource('inventoryLogs', InventoryLogController::class);
-
-    Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
 });

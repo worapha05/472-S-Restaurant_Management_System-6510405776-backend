@@ -8,6 +8,7 @@ use App\Http\Resources\FoodResource;
 use App\Models\Food;
 use App\Repositories\FoodRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
@@ -30,6 +31,7 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Food::class);
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
@@ -69,7 +71,8 @@ class FoodController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Gate::authorize('update', Food::class);
+        // Upadte Code
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Resources\TableResource;
 use App\Models\Table;
 use App\Repositories\TableRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TableController extends Controller
 {
@@ -20,6 +21,7 @@ class TableController extends Controller
 
     public function index()
     {
+        Gate::authorize('viewAny', Table::class);
         $tables = $this->tableRepository->getAll();
         return new TableCollection($tables);
     }
@@ -29,6 +31,7 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Table::class);
         $table = $this->tableRepository->create([
             'status' => $request->get('status'),
             'seats' => $request->get('seats'),
@@ -42,6 +45,7 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
+        Gate::authorize('view', $table);
         return new TableResource($table);
     }
 
@@ -50,6 +54,7 @@ class TableController extends Controller
      */
     public function update(Request $request, Table $table)
     {
+        Gate::authorize('update', $table);
         $this->tableRepository->update([
             'status' => $request->get('status'),
             'seats' => $request->get('seats'),
