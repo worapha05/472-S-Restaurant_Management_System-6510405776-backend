@@ -17,9 +17,9 @@ class StockItemResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->description,
             'current_stock' => $this->current_stock,
             'unit' => $this->unit,
+            'category' => $this->category
         ];
     }
 }

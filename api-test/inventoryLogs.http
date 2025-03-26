@@ -8,26 +8,26 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "user_id": 7,
-    "note": "aut",
-    "total_cost": 100,
-    "source": "93\/373 สะพาน ทหารอากาศอุทิศ\nหมู่บ้าน ประไพพรรณ, 98987"
+    "user_id": 1,
+    "note": null,
+    "type": "EXPORT",
+    "total_cost": 100
 }
 ###
 
 ### GET request to /api/inventoryLogs/{id}
-GET http://localhost/api/inventoryLogs/12
+GET http://localhost/api/inventoryLogs/51
 Accept: application/json
 ###
 
 ### PUT request to /api/inventoryLogs/{id}
-PUT http://localhost/api/inventoryLogs/12
+PUT http://localhost/api/inventoryLogs/24
 Accept: application/json
 Content-Type: application/json
 
 {
     "user_id": 7,
-    "note": "อยู่นี้จ้าาา",
+    "type": "EXPORT",
     "total_cost": 226948.03,
     "source": "93\/373 สะพาน ทหารอากาศอุทิศ\nหมู่บ้าน ประไพพรรณ, 98987"
 }

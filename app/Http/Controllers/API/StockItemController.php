@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Collections\StockItemCollection;
 use App\Http\Resources\StockItemResource;
+use App\Models\Enums\StockItemCategory;
 use App\Models\StockItem;
 use App\Repositories\StockItemRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\UpdateStockItemRequest;
 
 class StockItemController extends Controller
 {
@@ -27,23 +29,19 @@ class StockItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UpdateStockItemRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'min:3', 'max:255', 'unique:stock_items,name'],
-            'description' => ['required', 'min:3', 'max:255'],
-            'current_stock' => ['required', 'numeric', 'min:0'],
-            'unit' => ['required', 'min:3', 'max:255'],
-        ]);
+        $request->validated();
+        $category = StockItemCategory::fromThai($request->get('category'))->value;
 
-        $stockItem = $this->stockItemRepository->create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'current_stock' => $request->get('current_stock'),
-            'unit' => $request->get('unit'),
-        ]);
+        $stockItem = new StockItem();
+        $stockItem->name = $request->get('name');
+        $stockItem->category = $category;
+        $stockItem->current_stock = 0;
+        $stockItem->unit = $request->get('unit');
+        $stockItem->save();
 
-        return new StockItemResource($stockItem);
+        return new StockItemResource($stockItem->refresh());
     }
 
     /**
@@ -57,18 +55,13 @@ class StockItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StockItem $stockItem)
+    public function update(UpdateStockItemRequest $request, StockItem $stockItem)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'min:3', 'max:255', Rule::unique('stock_items', 'name')->ignore($stockItem->id)],
-            'description' => ['required', 'min:3', 'max:255'],
-            'current_stock' => ['required', 'numeric', 'min:0'],
-            'unit' => ['required', 'min:3', 'max:255'],
-        ]);
+        $request->validated();
 
         $this->stockItemRepository->update([
             'name' => $request->get('name'),
-            'description' => $request->get('description'),
+            'category' => $request->get('category'),
             'current_stock' => $request->get('current_stock'),
             'unit' => $request->get('unit'),
         ], $stockItem->id);
