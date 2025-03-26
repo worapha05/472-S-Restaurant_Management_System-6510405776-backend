@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Collections;
 
+use App\Http\Resources\StockEntryResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -14,8 +15,8 @@ class StockEntryCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return [
-            'data' => $this->collection,
-        ];
+        return $this->collection->transform(function($item) {
+            return new StockEntryResource($item); // แปลงแต่ละ item โดยใช้ ExampleResource
+        })->toArray();
     }
 }

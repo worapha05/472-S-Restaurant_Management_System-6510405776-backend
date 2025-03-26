@@ -11,7 +11,7 @@ class StockEntry extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [ 'stock_item_id', 'inventory_log_id', 'cost', 'quantity_added'];
+    protected $fillable = [ 'stock_item_id', 'inventory_log_id', 'cost', 'cost_per_unit', 'quantity'];
 
     public function inventory_logs(): BelongsTo
     {

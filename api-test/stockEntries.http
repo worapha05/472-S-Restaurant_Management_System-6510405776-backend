@@ -8,10 +8,11 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "stock_item_id": 51,
-    "inventory_log_id": 11,
-    "cost": 100,
-    "quantity_added": 70
+    "inventory_log_id": 24,
+    "stock_item_id": 9,
+    "quantity": 100,
+    "cost": 99.99,
+    "cost_per_unit": 1
 }
 ###
 
@@ -29,7 +30,8 @@ Content-Type: application/json
     "stock_item_id": 51,
     "inventory_log_id": 11,
     "cost": 200,
-    "quantity_added": 70
+    "cost_per_unit": 0,
+    "quantity": 70
 }
 ###
 

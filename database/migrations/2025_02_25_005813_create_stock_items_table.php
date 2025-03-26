@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stock_items', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('description');
+            $table->string('category')->default('MEAT');
             $table->double('current_stock');
             $table->string('unit');
             $table->timestamps();
