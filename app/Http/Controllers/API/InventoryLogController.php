@@ -6,6 +6,8 @@ use
     App\Http\Controllers\Controller;
 use App\Http\Resources\Collections\InventoryLogCollection;
 use App\Http\Resources\InventoryLogResource;
+use App\Models\Enums\InventoryLogType;
+use App\Models\Enums\StockItemCategory;
 use App\Models\InventoryLog;
 use App\Repositories\InventoryLogRepository;
 use App\Repositories\StockEntryRepository;
@@ -34,19 +36,15 @@ class InventoryLogController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
-            'note' => ['required', 'min:3', 'max:255'],
-            'total_cost' => ['required', 'numeric', 'min:0'],
-            'source' => ['required', 'min:3', 'max:255'],
-        ]);
+        $this->extracted($request);
 
-        $inventoryLog = $this->inventoryLogRepository->create([
-            'user_id' => $request->get('user_id'),
-            'note' => $request->get('note'),
-            'total_cost' => $request->get('total_cost'),
-            'source' => $request->get('source'),
-        ]);
+        $inventoryLog = new InventoryLog();
+        $inventoryLog->user_id = $request->get('user_id');
+        $inventoryLog->total_cost = $request->get('total_cost');
+        $inventoryLog->type = $request->get('type');
+        $inventoryLog->source = $request->get('source');
+        $inventoryLog->note = $request->get('note');
+        $inventoryLog->save();
         return new InventoryLogResource($inventoryLog->refresh());
     }
 
@@ -63,12 +61,7 @@ class InventoryLogController extends Controller
      */
     public function update(Request $request, InventoryLog $inventoryLog)
     {
-        $validated = $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
-            'note' => ['required', 'min:3', 'max:255'],
-            'total_cost' => ['required', 'numeric', 'min:0'],
-            'source' => ['required', 'min:3', 'max:255'],
-        ]);
+        $this->extracted($request);
 
         $this->inventoryLogRepository->update([
             'user_id' => $request->get('user_id'),
@@ -101,5 +94,29 @@ class InventoryLogController extends Controller
             'success' => true,
             'message' => "Inventory lod with id {$id} has been deleted"
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    private function extracted(Request $request): void
+    {
+        if ($request->get('type') == "นำเข้า") {
+            $validated = $request->validate([
+                'user_id' => ['required', 'exists:users,id'],
+                'total_cost' => ['required', 'numeric', 'min:0'],
+                'type' => ['required'],
+                'source' => ['required', 'min:3', 'max:255'],
+                'note' => ['min:0', 'max:255'],
+            ]);
+        } else {
+            $validated = $request->validate([
+                'user_id' => ['required', 'exists:users,id'],
+                'total_cost' => ['required', 'numeric', 'min:0'],
+                'type' => ['required'],
+                'note' => ['min:0', 'max:255'],
+            ]);
+        }
     }
 }

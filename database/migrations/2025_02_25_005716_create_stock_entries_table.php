@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('stock_entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(StockItem::class)->nullable();
-            $table->foreignIdFor(InventoryLog::class)->nullable();
+            $table->foreignIdFor(StockItem::class);
+            $table->foreignIdFor(InventoryLog::class);
             $table->double('cost');
-            $table->double('quantity_added');
+            $table->double('cost_per_unit');
+            $table->double('quantity');
             $table->timestamps();
             $table->softDeletes();
         });

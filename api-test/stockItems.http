@@ -8,33 +8,33 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "name": "เป็ดบด",
-    "description": "ไก่บดละเอียด",
-    "current_stock": 35,
-    "unit": "กิโลกรัม"
-}
-###
-
-### GET request to /api/stockItems/{id}
-GET http://localhost/api/stockItems/50
-Accept: application/json
-###
-
-### PUT request to /api/stockItems/{id}
-PUT http://localhost/api/stockItems/51
-Accept: application/json
-Content-Type: application/json
-
-{
-    "name" : "เป็ดบด",
-    "description": "หมูบดละเอียด",
+    "name" : "ไก่ย่าง",
+    "category": "ผัก",
     "current_stock": 0,
     "unit": "กิโลกรัม"
 }
 ###
 
+### GET request to /api/stockItems/{id}
+GET http://localhost/api/stockItems/59
+Accept: application/json
+###
+
+### PUT request to /api/stockItems/{id}
+PUT http://localhost/api/stockItems/56
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "ปู",
+    "category": "ผัก",
+    "current_stock": 0,
+    "unit": "กก."
+}
+###
+
 ### DELETE request to /api/stockItems/{id}
-DELETE http://localhost/api/stockItems/51
+DELETE http://localhost/api/stockItems/19
 Accept: application/json
 
 ###

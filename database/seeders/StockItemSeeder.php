@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Enums\StockItemCategory;
 use App\Models\StockItem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,9 +18,12 @@ class StockItemSeeder extends Seeder
         $content = Storage::json('stockItem.json');
 
         foreach ($content as $item) {
+
+            $category = StockItemCategory::fromThai($item['category'])->value;
+
             StockItem::create([
                 "name" => $item['name'],
-                "description" => $item['description'],
+                "category" => $category,
                 "current_stock" => $item['current_stock'],
                 "unit" => $item['unit'],
             ]);
