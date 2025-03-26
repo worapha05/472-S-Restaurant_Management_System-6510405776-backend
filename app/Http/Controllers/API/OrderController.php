@@ -26,7 +26,7 @@ class OrderController extends Controller
     public function index()
     {
         Gate::authorize('viewAny',  Order::class);
-        $orders = $this->orderRepository->getAll();
+        $orders = $this->orderRepository->getAllByDesc();
         return new OrderCollection($orders);
     }
 
