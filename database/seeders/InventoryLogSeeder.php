@@ -31,9 +31,7 @@ class InventoryLogSeeder extends Seeder
                 $source = Arr::random($sources);
                 $total_cost = random_int(100, 240) * 5;
                 if ($i % 2 === 0) {
-                    $user_id = 3;
-                } elseif ($i % 3 === 0) {
-                    $user_id = 5;
+                    $user_id = 2;
                 } else {
                     $user_id = 1;
                 }
@@ -42,9 +40,7 @@ class InventoryLogSeeder extends Seeder
                 $type = "EXPORT";
                 $note = "บันทึกการนำออกวัตถุดิบครั้งที่ {$number_ex}";
                 if ($i % 2 === 0) {
-                    $user_id = 3;
-                } elseif ($i % 3 === 0) {
-                    $user_id = 5;
+                    $user_id = 2;
                 } else {
                     $user_id = 1;
                 }
