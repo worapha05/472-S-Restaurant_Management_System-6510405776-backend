@@ -31,18 +31,15 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-//        Gate::authorize('create', Food::class);
+        Gate::authorize('create', Food::class);
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'status' => 'required|in:available, unavailable',
             'category' => 'required|in:main course,dessert,beverage',
             'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,gif,webp|max:5120',  // Validate image
+            'image_url' => 'required|string',  // Validate image
         ]);
-
-        // เก็บภาพใน MinIO
-        $imagePath = $request->file('image')->store('food_images', 's3');
 
         $food = Food::create([
             'name' => $request->input('name'),
@@ -50,7 +47,7 @@ class FoodController extends Controller
             'status' => $request->input('status'),
             'category' => $request->input('category'),
             'description' => $request->input('description'),
-            'image_url' => Storage::disk('s3')->url($imagePath),  // Get the URL of the uploaded image
+            'image_url' => $request->input('image_url'),  // Get the URL of the uploaded image
         ]);
 
         return new FoodResource($food);

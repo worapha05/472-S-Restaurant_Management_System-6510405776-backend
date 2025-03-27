@@ -46,11 +46,12 @@ Route::middleware('throttle:api')->group(function () {
         Route::apiResource('tables', TableController::class);
         Route::apiResource('reservations', ReservationController::class);
 
+        // File upload
+        Route::post('upload', [UploadController::class, 'uploadFile']);
+
         Route::get('/users/{userId}/reservations', [ReservationController::class, 'getReservationsByUser']);
     });
 
-    // File upload
-    Route::post('upload', [UploadController::class, 'uploadFile']);
 
     Route::apiResource('stockItems', StockItemController::class);
     Route::apiResource('stockEntries', StockEntryController::class);
