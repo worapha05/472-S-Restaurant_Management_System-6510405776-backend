@@ -33,7 +33,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('create', User::class);
         $user = $this->userRepository->create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
@@ -62,25 +61,39 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         Gate::authorize('update', $user);
-        if(Hash::check($request->get('password'), $user->password)) {
-            $this->userRepository->update([
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'username' => $request->get('email'),
-                'address' => $request->get('address'),
-                'phone_number' => $request->get('phone_number'),
-                'role' => $request->get('role'),
-            ], $user->id);
 
-            if ($request->get('new_password') != '') {
-                $this->userRepository->update([
-                    'password' => Hash::make($request->get('new_password'))
-                ], $user->id);
-            }
+        // Check if the password matches
+        if (!Hash::check($request->get('password'), $user->password)) {
+            // Return a 401 Unauthorized response with error message
+            return response()->json([
+                'message' => 'รหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบและลองใหม่อีกครั้ง',
+                'success' => false
+            ], 401);
         }
 
+        // If password matches, proceed with the update
+        $this->userRepository->update([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'username' => $request->get('username'), // Fixed to use username not email
+            'address' => $request->get('address'),
+            'phone_number' => $request->get('phone_number'),
+            'role' => $request->get('role'),
+        ], $user->id);
 
-        return new UserResource($user->refresh());
+        // Update password if new password is provided
+        if ($request->get('new_password') != '') {
+            $this->userRepository->update([
+                'password' => Hash::make($request->get('new_password'))
+            ], $user->id);
+        }
+
+        // Return the updated user data
+        return response()->json([
+            'message' => 'ข้อมูลถูกอัพเดทเรียบร้อยแล้ว',
+            'success' => true,
+            'data' => new UserResource($user->refresh())
+        ], 200);
     }
 
     /**

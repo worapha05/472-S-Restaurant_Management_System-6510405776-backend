@@ -32,6 +32,9 @@ Route::middleware('throttle:api')->group(function () {
     Route::get('tables', [TableController::class, 'index']);
     Route::get('tables/{tables}', [TableController::class, 'show']);
 
+    // Register
+    Route::post('users', [UserController::class, 'store']);
+
     // Protected routes (authentication required)
     Route::middleware('auth:sanctum')->group(function () {
         // Authentication
@@ -43,11 +46,11 @@ Route::middleware('throttle:api')->group(function () {
         Route::put('foods/{food}', [FoodController::class, 'update']);
         Route::patch('foods/{food}', [FoodController::class, 'update']);
 
-        Route::post('users', [FoodController::class, 'store']);
-        Route::put('users/{user}', [FoodController::class, 'update']);
-        Route::patch('users/{user}', [FoodController::class, 'update']);
+        Route::get('users', [UserController::class, 'index']);
+        Route::get('users/{user}', [UserController::class, 'show']);
+        Route::put('users/{user}', [UserController::class, 'update']);
+        Route::patch('users/{user}', [UserController::class, 'update']);
 
-        Route::apiResource('users', UserController::class);
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('order_lists', OrderListController::class);
 
