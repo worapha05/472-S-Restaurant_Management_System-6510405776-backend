@@ -18,9 +18,16 @@ class UserRepository
         return $this->model::where('username', 'LIKE', "%{$username}%")->get();
     }
 
-    public function getNameById(int $id): String
+    public function getNameById(?int $userId): string
     {
-        return $this->model::where('id', $id)->value('name');
+        if ($userId === null) {
+            return ''; // Return empty string if no user ID provided
+        }
+
+        $user = User::find($userId);
+
+        // Return user name if found, otherwise return a default value
+        return $user ? $user->name : 'Unknown User';
     }
 
 }

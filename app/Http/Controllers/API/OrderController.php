@@ -37,7 +37,7 @@ class OrderController extends Controller
     {
         Gate::authorize('create',  Order::class);
         $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
+            'user_id' => ['nullable', 'exists:users,id'],
             'table_id' => ['nullable', 'exists:tables,id'],
             'address' => ['nullable', 'string', 'max:255'],
             'type' => ['required', 'in:DELIVERY,PICKUP,DINE_IN'],
