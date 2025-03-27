@@ -28,6 +28,10 @@ Route::middleware('throttle:api')->group(function () {
     Route::get('foods', [FoodController::class, 'index']);
     Route::get('foods/{food}', [FoodController::class, 'show']);
 
+    // Tables
+    Route::get('tables', [TableController::class, 'index']);
+    Route::get('tables/{tables}', [TableController::class, 'show']);
+
     // Protected routes (authentication required)
     Route::middleware('auth:sanctum')->group(function () {
         // Authentication
@@ -38,12 +42,11 @@ Route::middleware('throttle:api')->group(function () {
         Route::post('foods', [FoodController::class, 'store']);
         Route::put('foods/{food}', [FoodController::class, 'update']);
         Route::patch('foods/{food}', [FoodController::class, 'update']);
-        Route::delete('foods/{food}', [FoodController::class, 'destroy']);
 
         Route::apiResource('users', UserController::class);
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('order_lists', OrderListController::class);
-        Route::apiResource('tables', TableController::class);
+
         Route::apiResource('reservations', ReservationController::class);
 
         // File upload

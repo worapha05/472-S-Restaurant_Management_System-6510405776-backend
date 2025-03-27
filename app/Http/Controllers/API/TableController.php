@@ -21,7 +21,6 @@ class TableController extends Controller
 
     public function index()
     {
-        Gate::authorize('viewAny', Table::class);
         $tables = $this->tableRepository->getAll();
         return new TableCollection($tables);
     }
@@ -45,7 +44,6 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        Gate::authorize('view', $table);
         return new TableResource($table);
     }
 
