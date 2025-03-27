@@ -13,6 +13,7 @@ use App\Repositories\InventoryLogRepository;
 use App\Repositories\StockEntryRepository;
 use App\Repositories\StockItemRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StockEntryController extends Controller
 {
@@ -26,6 +27,7 @@ class StockEntryController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', StockEntry::class);
         $stockEntries = $this->stockEntryRepository->getAll();
         return new StockEntryCollection($stockEntries);
     }
@@ -35,6 +37,7 @@ class StockEntryController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', StockEntry::class);
         $validated = $request->validate([
             'stock_item_id' => ['required', 'exists:stock_items,id'],
             'inventory_log_id' => ['required', 'exists:inventory_logs,id'],
@@ -67,6 +70,7 @@ class StockEntryController extends Controller
      */
     public function show(StockEntry $stockEntry)
     {
+        Gate::authorize('view', $stockEntry);
         return new StockEntryResource($stockEntry);
     }
 
@@ -75,6 +79,7 @@ class StockEntryController extends Controller
      */
     public function update(Request $request, StockEntry $stockEntry)
     {
+        Gate::authorize('update', $stockEntry);
         $validated = $request->validate([
             'stock_item_id' => ['required', 'exists:stock_items,id'],
             'inventory_log_id' => ['required', 'exists:inventory_logs,id'],
@@ -98,6 +103,7 @@ class StockEntryController extends Controller
      */
     public function destroy(StockEntry $stockEntry)
     {
+        Gate::authorize('delete', $stockEntry);
         $stockItemId = $stockEntry->stock_item_id;
         $id = $stockEntry->id;
         if ($this->stockItemRepository->isEmptyCurrentStock($stockItemId)) {

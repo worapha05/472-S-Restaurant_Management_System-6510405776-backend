@@ -1,14 +1,17 @@
 ### GET request to /api/stockItems
 GET http://localhost/api/stockItems
+Authorization: Bearer 1|iYwTgAejrpOHuXEb76bOSbUWuNvGvtIahYScC6g3465244dc
+Accept: application/json
 ###
 
 ### POST request to /api/stockItems
 POST http://localhost/api/stockItems
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 1|iYwTgAejrpOHuXEb76bOSbUWuNvGvtIahYScC6g3465244dc
 
 {
-    "name" : "ไก่ย่าง",
+    "name" : "ไก่ย่าง5บาทททท",
     "category": "ผัก",
     "current_stock": 0,
     "unit": "กิโลกรัม"
@@ -16,25 +19,28 @@ Content-Type: application/json
 ###
 
 ### GET request to /api/stockItems/{id}
-GET http://localhost/api/stockItems/59
+GET http://localhost/api/stockItems/7
 Accept: application/json
+Authorization: Bearer 1|iYwTgAejrpOHuXEb76bOSbUWuNvGvtIahYScC6g3465244dc
 ###
 
 ### PUT request to /api/stockItems/{id}
-PUT http://localhost/api/stockItems/56
+PUT http://localhost/api/stockItems/15
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 
 {
-    "name" : "ปู",
-    "category": "ผัก",
+    "name" : "หมูหันฮ่องกง",
+    "category": "MEAT",
     "current_stock": 0,
-    "unit": "กก."
+    "unit": "กิโลกรัม"
 }
 ###
 
 ### DELETE request to /api/stockItems/{id}
 DELETE http://localhost/api/stockItems/19
 Accept: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 
 ###

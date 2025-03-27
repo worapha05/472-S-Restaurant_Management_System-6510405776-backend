@@ -14,6 +14,7 @@ use App\Repositories\StockEntryRepository;
 use App\Repositories\StockItemRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class InventoryLogController extends Controller
 {
@@ -27,6 +28,7 @@ class InventoryLogController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', InventoryLog::class);
         $inventoryLogs = $this->inventoryLogRepository->getAll();
         return new InventoryLogCollection($inventoryLogs);
     }
@@ -36,6 +38,7 @@ class InventoryLogController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', InventoryLog::class);
         $this->extracted($request);
 
         $inventoryLog = new InventoryLog();
@@ -53,6 +56,7 @@ class InventoryLogController extends Controller
      */
     public function show(InventoryLog $inventoryLog)
     {
+        Gate::authorize('view', $inventoryLog);
         return new InventoryLogResource($inventoryLog);
     }
 
@@ -61,6 +65,7 @@ class InventoryLogController extends Controller
      */
     public function update(Request $request, InventoryLog $inventoryLog)
     {
+        Gate::authorize('update', $inventoryLog);
         $this->extracted($request);
 
         $this->inventoryLogRepository->update([
@@ -77,6 +82,7 @@ class InventoryLogController extends Controller
      */
     public function destroy(InventoryLog $inventoryLog)
     {
+        Gate::authorize('delete', $inventoryLog);
         $id = $inventoryLog->id;
         $stockEntries = $this->stockEntryRepository->findByInventoryLogId($id);
         foreach ($stockEntries as $stockEntry) {
