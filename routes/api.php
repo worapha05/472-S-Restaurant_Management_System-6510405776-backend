@@ -43,6 +43,10 @@ Route::middleware('throttle:api')->group(function () {
         Route::put('foods/{food}', [FoodController::class, 'update']);
         Route::patch('foods/{food}', [FoodController::class, 'update']);
 
+        Route::post('users', [FoodController::class, 'store']);
+        Route::put('users/{user}', [FoodController::class, 'update']);
+        Route::patch('users/{user}', [FoodController::class, 'update']);
+
         Route::apiResource('users', UserController::class);
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('order_lists', OrderListController::class);

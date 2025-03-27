@@ -75,13 +75,17 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         Gate::authorize('update', $order);
-        $validated = $request->validate([
-            'status' => ['nullable', 'in:PENDING,WAITING,COMPLETED,CANCELLED'],
-            'payment_method' => ['nullable', 'string', 'in:CASH,CREDIT_CARD,ONLINE'],
-            'sum_price' => ['nullable', 'numeric', 'min:0'],
-        ]);
 
-        $request->user()->orders()->update($validated);
+        if($order->status === 'PENDING') {
+            $this->orderRepository->update([
+                'accept' => $request->get('accept'),
+            ], $order->id);
+        }
+
+        $this->orderRepository->update([
+            'status' => $request->get('status')
+        ], $order->id);
+
 
         return new OrderResource($order->refresh());
     }
