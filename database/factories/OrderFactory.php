@@ -23,7 +23,7 @@ class OrderFactory extends Factory
             'accept' => $this->faker->optional()->dateTime(),
             'status' => $this->faker->randomElement(['PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED']),
             'type' => $this->faker->randomElement(['DELIVERY', 'TAKEAWAY', 'DINE_IN']),
-            'payment_method' => $this->faker->randomElement(['CASH', 'CREDIT_CARD', 'QRCODE']),
+            'payment_method' => 'CASH',
             'sum_price' => 0, // Initial value, will be updated after order lists are created
             'created_at' => now(),
             'updated_at' => now(),
