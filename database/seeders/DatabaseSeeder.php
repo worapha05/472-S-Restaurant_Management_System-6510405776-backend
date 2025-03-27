@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             StockItemSeeder::class,
             InventoryLogSeeder::class,
             StockEntrySeeder::class,
+            FoodSeeder::class,
         ]);
-        Food::factory(50)->create();
         Table::factory(20)->create();
 
         Order::factory(30)->create();

@@ -35,8 +35,8 @@ class FoodController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'status' => 'required|in:available, unavailable',
-            'category' => 'required|in:main course,dessert,beverage',
+            'status' => 'required|in:AVAILABLE,UNAVAILABLE',
+            'category' => 'required|in:MAIN COURSE,DESSERT,BEVERAGE',
             'description' => 'nullable|string',
             'image_url' => 'required|string',  // Validate image
         ]);
