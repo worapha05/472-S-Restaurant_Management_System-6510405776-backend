@@ -56,6 +56,7 @@ docker run --rm \
 sail up -d
 sail artisan key:generate
 sail artisan migrate
+sail artisan migrate:fresh --seed
 ```
 ## จากนั้นลองเข้าเว็บตามนี้
 

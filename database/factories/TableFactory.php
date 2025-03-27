@@ -17,7 +17,7 @@ class TableFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->randomElement(['AVAILABLE', 'NOT_AVAILABLE']),
+            'status' => $this->faker->randomElement(['AVAILABLE']),
             'seats' => $this->faker->numberBetween(1, 8)
         ];
     }
