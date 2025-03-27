@@ -1,14 +1,16 @@
 ### GET request to /api/stockEntries
 GET http://localhost/api/stockEntries
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 ###
 
 ### POST request to /api/stockEntries
 POST http://localhost/api/stockEntries
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 
 {
-    "inventory_log_id": 24,
+    "inventory_log_id": 15,
     "stock_item_id": 9,
     "quantity": 100,
     "cost": 99.99,
@@ -19,15 +21,17 @@ Content-Type: application/json
 ### GET request to /api/stockEntries/{id}
 GET http://localhost/api/stockEntries/41
 Accept: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 ###
 
 ### PUT request to /api/stockEntries/{id}
 PUT http://localhost/api/stockEntries/41
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 
 {
-    "stock_item_id": 51,
+    "stock_item_id": 5,
     "inventory_log_id": 11,
     "cost": 200,
     "cost_per_unit": 0,
@@ -38,5 +42,6 @@ Content-Type: application/json
 ### DELETE request to /api/stockEntries/{id}
 DELETE http://localhost/api/stockEntries/41
 Accept: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
 
 ###
