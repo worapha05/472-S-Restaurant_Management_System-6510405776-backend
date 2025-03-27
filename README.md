@@ -7,7 +7,7 @@
     <a href="#-team-members">👥 Team Members</a>‎ ‎ |‎ ‎ 
     <a href="#%EF%B8%8F-installation">⚙️ Installation</a>‎ ‎ |‎ ‎ 
     <a href="#-sample-user-data">📋 Sample Data</a>‎ ‎ |‎ ‎ 
-    <a href="#-release-tag">🏷️ Release Tag</a>
+    <a href="#%EF%B8%8F-release-tag">🏷️ Release Tag</a>
 </p>
 
 ---
@@ -44,16 +44,22 @@ cp .env.example .env
 
 Replace with:
 ```env
+# set application timezone to match Thailand's timezone
 APP_TIMEZONE=Asia/Bangkok
 ```
 
 ```env
+# Configure application language settings
+# APP_LOCALE: set primary language to Thai
+# APP_FALLBACK_LOCALE: use Thai as fallback language if primary fails
+# APP_FAKER_LOCALE: use Thai locale for generating fake data
 APP_LOCALE=th
 APP_FALLBACK_LOCALE=th
 APP_FAKER_LOCALE=th_TH
 ```
 
 ```env
+# defining parameters for database
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
