@@ -42,7 +42,7 @@ class UploadController extends Controller
             }
 
             // Extract just the relative path (you may need to adjust this depending on your exact URL structure)
-            $relativePath = '/images/' . basename($filePath);
+            $relativePath = 'images/' . basename($filePath);
 
             return response()->json([
                 'success' => true,
