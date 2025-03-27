@@ -32,27 +32,25 @@ class FoodController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'status' => 'required|in:AVAILABLE,UNAVAILABLE',
+            'price' => 'required|numeric|min:1',
+            'status' => 'required|in:available, unavailable',
             'category' => 'required|in:main course,dessert,beverage',
             'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,gif,webp|max:5120',  // Validate image
+            'image_url' => 'required|string',
         ]);
 
-        // เก็บภาพใน MinIO
-        $imagePath = $request->file('image')->store('food_images', 's3');
-
-        $food = Food::create([
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'status' => $request->input('status'),
-            'category' => $request->input('category'),
-            'description' => $request->input('description'),
-            'image_url' => Storage::disk('s3')->url($imagePath),  // Get the URL of the uploaded image
+        $food = $this->foodRepository->create([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'status' => $request->get('status'),
+            'category' => $request->get('category'),
+            'description' => $request->get('description'),
+            'image_url' => $request->get('image_url'),
         ]);
 
         return new FoodResource($food);
     }
+
 
 
 
@@ -67,9 +65,20 @@ class FoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Food $food)
     {
-        //
+
+        $this->foodRepository->update([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'status' => $request->get('status'),
+            'category' => $request->get('category'),
+            'description' => $request->get('description'),
+            'image_url' => $request->get('image_url'),
+        ], $food->id);
+
+        return new FoodResource($food->refresh());
+
     }
 
     /**
