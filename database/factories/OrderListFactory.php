@@ -19,11 +19,11 @@ class OrderListFactory extends Factory
         $food = Food::inRandomOrder()->first();
 
         return [
-            'order_id' => fake()->randomElement(Order::all()->pluck('id')->toArray()), // Creates a new Order if needed
+            'order_id' => Order::factory(), // Create a relationship with Order but allow overriding
             'food_id' => $food->id,
             'description' => $this->faker->sentence(),
             'price' => $food->price,
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'quantity' => $this->faker->numberBetween(1, 5),
             'status' => $this->faker->randomElement(['IN_PROGRESS', 'COMPLETED', 'CANCELLED']),
             'created_at' => now(),
             'updated_at' => now(),
