@@ -47,6 +47,10 @@ Route::middleware('throttle:api')->group(function () {
         Route::apiResource('orders', OrderController::class);
         Route::apiResource('order_lists', OrderListController::class);
 
+        Route::apiResource('stockItems', StockItemController::class);
+        Route::apiResource('stockEntries', StockEntryController::class);
+        Route::apiResource('inventoryLogs', InventoryLogController::class);
+
         Route::apiResource('reservations', ReservationController::class);
 
         // File upload
@@ -56,7 +60,4 @@ Route::middleware('throttle:api')->group(function () {
     });
 
 
-    Route::apiResource('stockItems', StockItemController::class);
-    Route::apiResource('stockEntries', StockEntryController::class);
-    Route::apiResource('inventoryLogs', InventoryLogController::class);
 });

@@ -8,6 +8,7 @@ use App\Http\Resources\StockItemResource;
 use App\Models\Enums\StockItemCategory;
 use App\Models\StockItem;
 use App\Repositories\StockItemRepository;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\UpdateStockItemRequest;
@@ -22,6 +23,7 @@ class StockItemController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', StockItem::class);
         $stockItems = $this->stockItemRepository->getAll();
         return new StockItemCollection($stockItems);
     }
@@ -31,6 +33,7 @@ class StockItemController extends Controller
      */
     public function store(UpdateStockItemRequest $request)
     {
+        Gate::authorize('create', StockItem::class);
         $request->validated();
         $category = StockItemCategory::fromThai($request->get('category'))->value;
 
@@ -49,6 +52,7 @@ class StockItemController extends Controller
      */
     public function show(StockItem $stockItem)
     {
+        Gate::authorize('view', $stockItem);
         return new StockItemResource($stockItem);
     }
 
@@ -57,6 +61,7 @@ class StockItemController extends Controller
      */
     public function update(UpdateStockItemRequest $request, StockItem $stockItem)
     {
+        Gate::authorize('update', $stockItem);
         $request->validated();
 
         $this->stockItemRepository->update([
@@ -73,6 +78,7 @@ class StockItemController extends Controller
      */
     public function destroy(StockItem $stockItem)
     {
+        Gate::authorize('delete', $stockItem);
         $id = $stockItem->id;
         if ($this->stockItemRepository->isEmptyCurrentStock($id)) {
             $stockItem->delete();

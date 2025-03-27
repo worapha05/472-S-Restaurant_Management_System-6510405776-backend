@@ -18,8 +18,7 @@ class StockItemFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->text(),
-            'current_stock' => $this->faker->randomFloat(2, 1, 100),
+            'current_stock' => 0,
             'unit' => $this->faker->word(),
         ];
     }
