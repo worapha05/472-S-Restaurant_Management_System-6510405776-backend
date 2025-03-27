@@ -11,7 +11,7 @@ class FoodSeeder extends Seeder
     {
         $foods = [
             [
-                'name' => 'Grilled Salmon Delight',
+                'name' => 'แซลมอนย่างสุดพิเศษ',
                 'price' => 259,
                 'status' => 'AVAILABLE',
                 'category' => 'MAIN COURSE',
@@ -19,7 +19,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
             [
-                'name' => 'Chicken Parmesan',
+                'name' => 'ไก่พาร์เมซาน',
                 'price' => 199,
                 'status' => 'UNAVAILABLE',
                 'category' => 'MAIN COURSE',
@@ -27,7 +27,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
             [
-                'name' => 'Grilled Steak',
+                'name' => 'สเต็กเนื้อติดมันย่าง',
                 'price' => 349,
                 'status' => 'AVAILABLE',
                 'category' => 'MAIN COURSE',
@@ -35,7 +35,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
             [
-                'name' => 'Spaghetti Carbonara',
+                'name' => 'สปาเก็ตตี้คาโบนาร่า',
                 'price' => 179,
                 'status' => 'UNAVAILABLE',
                 'category' => 'MAIN COURSE',
@@ -43,7 +43,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
             [
-                'name' => 'Shrimp Scampi',
+                'name' => 'กุ้งสแคมปี้',
                 'price' => 229,
                 'status' => 'AVAILABLE',
                 'category' => 'MAIN COURSE',
@@ -51,16 +51,16 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
             [
-                'name' => 'Beef Wellington',
+                'name' => 'บีฟเวลลิงตัน',
                 'price' => 499,
                 'status' => 'UNAVAILABLE',
                 'category' => 'MAIN COURSE',
                 'description' => 'เนื้อวัวชิ้นหนาหุ้มด้วยแป้งพัฟและมะกอกดูเซลล์ พร้อมกับแพทé.',
                 'image_url' => 'images/2025_03_9951db28-1b40-41cd-a4b4-661c50447db7.webp',
             ],
-            // Dessert
+            // ขนมหวาน
             [
-                'name' => 'Caramel Cake',
+                'name' => 'เค้กคาราเมล',
                 'price' => 289,
                 'status' => 'AVAILABLE',
                 'category' => 'DESSERT',
@@ -68,7 +68,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
             [
-                'name' => 'Tiramisu',
+                'name' => 'ทีรามิสุ',
                 'price' => 250,
                 'status' => 'AVAILABLE',
                 'category' => 'DESSERT',
@@ -76,7 +76,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
             [
-                'name' => 'Cheesecake',
+                'name' => 'ชีสเค้ก',
                 'price' => 299,
                 'status' => 'AVAILABLE',
                 'category' => 'DESSERT',
@@ -84,7 +84,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
             [
-                'name' => 'Panna Cotta',
+                'name' => 'พานนาคอตต้า',
                 'price' => 180,
                 'status' => 'UNAVAILABLE',
                 'category' => 'DESSERT',
@@ -92,7 +92,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
             [
-                'name' => 'Fruit Tart',
+                'name' => 'ทาร์ตผลไม้',
                 'price' => 220,
                 'status' => 'AVAILABLE',
                 'category' => 'DESSERT',
@@ -100,16 +100,16 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
             [
-                'name' => 'Chocolate Lava Cake',
+                'name' => 'เค้กช็อคโกแลตลาวา',
                 'price' => 320,
                 'status' => 'UNAVAILABLE',
                 'category' => 'DESSERT',
                 'description' => 'เค้กช็อคโกแลตอุ่นๆ ที่มีเนื้อช็อคโกแลตละลายด้านใน เสิร์ฟพร้อมไอศกรีมวานิลลา.',
                 'image_url' => 'images/2025_03_5b726c1f-79ba-471a-a35d-7131d831464a.jpeg',
             ],
-            // Beverage
+            // เครื่องดื่ม
             [
-                'name' => 'Lime Iced Tea',
+                'name' => 'น้ำชามะนาวเย็น',
                 'price' => 115,
                 'status' => 'AVAILABLE',
                 'category' => 'BEVERAGE',
@@ -117,7 +117,7 @@ class FoodSeeder extends Seeder
                 'image_url' => 'images/2025_03_03353b6a-9c0e-4947-91fe-a76b6ae49381.jpeg',
             ],
             [
-                'name' => 'Strawberry Smoothie',
+                'name' => 'สมูทตี้สตรอเบอรี่',
                 'price' => 160,
                 'status' => 'UNAVAILABLE',
                 'category' => 'BEVERAGE',
