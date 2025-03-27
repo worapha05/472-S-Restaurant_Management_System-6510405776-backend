@@ -31,11 +31,11 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('create', Food::class);
+//        Gate::authorize('create', Food::class);
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'status' => 'required|in:AVAILABLE,UNAVAILABLE',
+            'status' => 'required|in:available, unavailable',
             'category' => 'required|in:main course,dessert,beverage',
             'description' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,gif,webp|max:5120',  // Validate image
@@ -69,8 +69,20 @@ class FoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Food $food)
     {
+
+        $this->foodRepository->update([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'status' => $request->get('status'),
+            'category' => $request->get('category'),
+            'description' => $request->get('description'),
+            'image_url' => $request->get('image_url'),
+        ], $food->id);
+
+        return new FoodResource($food->refresh());
+
         Gate::authorize('update', Food::class);
         // Upadte Code
     }
