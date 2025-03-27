@@ -1,0 +1,54 @@
+### GET request to /api/inventoryLogs
+GET http://localhost/api/inventoryLogs
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
+###
+
+### POST request to /api/inventoryLogs
+POST http://localhost/api/inventoryLogs
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
+
+{
+    "user_id": 1,
+    "note": null,
+    "type": "EXPORT",
+    "total_cost": 100
+}
+###
+
+### GET request to /api/inventoryLogs/{id}
+GET http://localhost/api/inventoryLogs/15
+Accept: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
+###
+
+### PUT request to /api/inventoryLogs/{id}
+PUT http://localhost/api/inventoryLogs/15
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
+
+{
+    "user_id": 7,
+    "type": "EXPORT",
+    "total_cost": 226948.03,
+    "source": "93\/373 สะพาน ทหารอากาศอุทิศ\nหมู่บ้าน ประไพพรรณ, 98987"
+}
+###
+
+### DELETE request to /api/inventoryLogs/{id}
+DELETE http://localhost/api/inventoryLogs/15
+Accept: application/json
+Authorization: Bearer 18|cFGWXcRgbXDNnaHEfMb9AXrhMEf3lUm63JbjcLqYefeede41
+
+###
+
+### POST request to login
+POST http://localhost/api/login
+Accept: application/json
+Content-Type: application/json
+
+{ "email" : "chnkant38@example.net", "password" : "123" }
+####
+
