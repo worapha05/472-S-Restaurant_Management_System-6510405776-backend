@@ -40,7 +40,7 @@ class OrderController extends Controller
             'user_id' => ['nullable', 'exists:users,id'],
             'table_id' => ['nullable', 'exists:tables,id'],
             'address' => ['nullable', 'string', 'max:255'],
-            'type' => ['required', 'in:DELIVERY,PICKUP,DINE_IN'],
+            'type' => ['required', 'in:DELIVERY,TAKEAWAY,DINE_IN'],
             'payment_method' => ['required', 'in:CASH,CREDIT_CARD,QRCODE'],
             'sum_price' => ['required', 'numeric', 'min:0'],
         ]);
