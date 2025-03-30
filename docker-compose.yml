@@ -2,7 +2,15 @@ services:
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.4
+            # บรรทัดบนใช้ตอนรัน laravel ปกติ ที่ไม่ต้องสร้าง Dockerfile เอง
+            # ถ้า config project ตาม github repository นี้
+            # เนื่องจากการ config project จะสร้าง Dockerfile ให้เลย
+
             dockerfile: Dockerfile
+            # บรรทัดบน ถ้าใช้ Dockerfile ที่สร้างจาก Solo Project CI/CD
+            # ทำ comment บรรทัด context: ./vendor/laravel/sail/runtimes/8.4
+            # หลังจากนั้นก็ config project ตาม github repository นี้
+            # ก็สามารถสามารถรัน backend ได้ตามปกติ
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.4/app
